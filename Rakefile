@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 
+ROOT = File.dirname(__FILE__)
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
@@ -21,6 +23,13 @@ require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
   spec.spec_files = FileList['spec/**/*_spec.rb']
+  spec.spec_opts = ['--options', "#{ROOT}/spec/spec.opts"]
+end
+
+Spec::Rake::SpecTask.new(:spec_integration) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.spec_files = FileList['spec_integration/integration_spec.rb']
+  spec.spec_opts = ['--options', "#{ROOT}/spec_integration/spec.opts"]
 end
 
 Spec::Rake::SpecTask.new(:rcov) do |spec|
