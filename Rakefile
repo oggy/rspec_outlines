@@ -13,7 +13,7 @@ begin
     gem.homepage = "http://github.com/oggy/rspec_outlines"
     gem.authors = ["George Ogata"]
     gem.add_development_dependency "rspec"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "mocha"
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
