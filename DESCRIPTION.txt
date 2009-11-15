@@ -1,0 +1,12 @@
+Cucumber outlines for RSpec!
+
+    describe "Adding two numbers" do
+      outline "should return the sum" do
+        (a + b).should == c
+      end
+
+      fields :a, :b, :c
+      values  1,  1,  2
+      values  2,  3,  5
+      values  1, -1,  0
+    end

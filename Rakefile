@@ -7,8 +7,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "rspec_outlines"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "Define specs in tables."
+    gem.description = File.read("#{ROOT}/DESCRIPTION.txt")
     gem.email = "george.ogata@gmail.com"
     gem.homepage = "http://github.com/oggy/rspec_outlines"
     gem.authors = ["George Ogata"]
