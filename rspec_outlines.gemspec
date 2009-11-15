@@ -9,8 +9,20 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["George Ogata"]
-  s.date = %q{2009-09-14}
-  s.description = %q{TODO: longer description of your gem}
+  s.date = %q{2009-11-14}
+  s.description = %q{Cucumber outlines for RSpec!
+
+    describe "Adding two numbers" do
+      outline "should return the sum" do
+        (a + b).should == c
+      end
+
+      fields :a, :b, :c
+      values  1,  1,  2
+      values  2,  3,  5
+      values  1, -1,  0
+    end
+}
   s.email = %q{george.ogata@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -19,6 +31,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     "DESCRIPTION.txt",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -43,11 +56,11 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Define specs in tables.}
   s.test_files = [
-    "spec/spec_helper.rb",
+    "spec/example_group_spec.rb",
      "spec/example_methods_spec.rb",
-     "spec/example_group_spec.rb"
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
