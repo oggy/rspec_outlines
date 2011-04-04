@@ -9,11 +9,12 @@ module RSpecOutlines
     module ClassMethods
       def outline(name=nil, &definition)
         if name
-          outline_body = lambda { |x| it(name, &definition) }
+          outline_body = lambda { |x| it(outline_example_name(name), &definition) }
         else
           outline_body = definition
         end
         @current_outline = Outline.new(self, &outline_body)
+        @current_outline_example_counter = 0
       end
 
       def current_outline
@@ -33,6 +34,7 @@ module RSpecOutlines
       def instance_eval_with_outline_binding(outline_binding, &block)
         original_outline_binding = @current_outline_binding
         @current_outline_binding = outline_binding
+        @current_outline_example_counter += 1
         begin
           instance_eval(&block)
         ensure
@@ -40,7 +42,21 @@ module RSpecOutlines
         end
       end
 
-      attr_reader :current_outline_binding
+      def outline_example_name(name)
+        name = name.dup
+        changed = name.gsub!(/:(?:(\w+|#)|\{(\w+)\})/) do
+          field = $1 || $2
+          if field == '#'
+            current_outline_example_counter
+          else
+            current_outline_binding[field.to_sym]
+          end
+        end
+        # Give specs have unique names by default.
+        changed ? name : outline_example_name("#{name} (:#)")
+      end
+
+      attr_reader :current_outline_binding, :current_outline_example_counter
     end
 
     def method_missing(name, *args)
