@@ -19,7 +19,7 @@ This defines 3 examples. Each one consists of the block given to `outline`, with
 `a`, `b`, and `c` set to the values given in the table below it. Easy, huh?
 
 Aside from being a more readable way to write repetitive specs, tables are a
-great way to see that you've covered all the combination of arguments you need
+great way to see that you've covered all the combinations of arguments you need
 to test.
 
 For example, suppose in the above example you want to ensure you've checked
@@ -35,15 +35,15 @@ using every combination of positive and negative arguments:
       values -2, -3,  5,       0
       values -2, -3, -5,     -10
 
-Now you can clearly see that you've tested every combination.
+Now you can clearly see you've tested every combination.
 
 ## Usage
 
-The first example above shows just about everything. Use `outline` to define a
-spec outline, `fields` to declare the variables, and `values` to create an
-example with the given values bound to those variables.
+As in the first example, use `outline` to define a spec outline, `fields` to
+declare the variables, and `values` to create an example with the given values
+bound to those variables.
 
-There are some tricks you can play with `outline`, however.
+There are also some tricks you can play with `outline`.
 
 ## Substitutions in example descriptions
 
@@ -109,7 +109,7 @@ example group level.
     end
 
 This lets you define multiple specs inside the block, or use more elaborate
-logic to compute the spec descriptions. Oh, the freedom!
+logic to compute the spec descriptions.
 
 ## Contributing
 
