@@ -8,7 +8,12 @@ module RSpecOutlines
 
     module ClassMethods
       def outline(name=nil, &definition)
-        @current_outline = Outline.new(self, name, &definition)
+        if name
+          outline_body = lambda { |x| it(name, &definition) }
+        else
+          outline_body = definition
+        end
+        @current_outline = Outline.new(self, &outline_body)
       end
 
       def current_outline
@@ -37,8 +42,6 @@ module RSpecOutlines
 
       attr_reader :current_outline_binding
     end
-
-    # TODO: override it, etc. to set the example's outline binding
 
     def method_missing(name, *args)
       outline_binding = example.outline_binding
@@ -69,14 +72,13 @@ module RSpecOutlines
   end
 
   class Outline
-    def initialize(example_group, name, &definition)
+    def initialize(example_group, &definition)
       @example_group = example_group
-      @name = name
       @definition = definition
       @fields = nil
     end
 
-    attr_reader :example_group, :name, :fields, :definition
+    attr_reader :example_group, :fields, :definition
 
     def fields=(fields)
       @fields = fields.map { |v| v.to_sym }
