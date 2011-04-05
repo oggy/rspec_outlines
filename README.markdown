@@ -4,42 +4,24 @@ Cuke-style scenario outlines for RSpec.
 
 ## Example
 
-    describe "Adding three numbers" do
-      outline "should return the sum" do
-        (a + b + c).should == result
+    describe User do
+      outline "should validate correctly" do
+        @user = Factory(:user, name => value)
+        @user.errors[name].should == message
       end
 
-      fields :a, :b, :c, :result
-      values  1,  1,  2,       4
-      values -1, -2, -3,      -6
-      values -1,  1,  0,       0
+      fields :name    , :value, :message
+      values :name    , ""    , "name is required"
+      values :password, ""    , "password is required"
+      values :password, "hi"  , "password too weak"
     end
 
 This defines 3 examples. Each one consists of the block given to `outline`, with
-`a`, `b`, and `c` set to the values given in the table below it. Easy, huh?
-
-Aside from being a more readable way to write repetitive specs, tables are a
-great way to see that you've covered all the combinations of arguments you need
-to test.
-
-For example, suppose in the above example you want to ensure you've checked
-using every combination of positive and negative arguments:
-
-      fields :a, :b, :c, :result
-      values  2,  3,  5,      10
-      values  2,  3, -5,       0
-      values  2, -3,  5,       4
-      values  2, -3, -5,      -6
-      values -2,  3,  5,       6
-      values -2,  3, -5,      -4
-      values -2, -3,  5,       0
-      values -2, -3, -5,     -10
-
-Now you can clearly see you've tested every combination.
+`name` and `value` set to the values given in the table below it.
 
 ## Usage
 
-As in the first example, use `outline` to define a spec outline, `fields` to
+As in the example above, use `outline` to define a spec outline, `fields` to
 declare the variables, and `values` to create an example with the given values
 bound to those variables.
 
@@ -69,15 +51,15 @@ Might produce names like:
 
 You can also interpolate a 1-based index using `:#`. Example:
 
-    outline "should return the sum (:#)" do
+    outline "should work (:#)" do
       ...
     end
 
 Will produce names:
 
-    should return the sum (1)
-    should return the sum (2)
-    should return the sum (3)
+    should work (1)
+    should work (2)
+    should work (3)
     ...
 
 Useful when you just want to keep your spec names distinct, but don't care
